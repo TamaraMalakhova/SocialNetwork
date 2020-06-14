@@ -21,4 +21,5 @@
 
 .profilePhoto{
     grid-area: ava;
+    max-width: 200px;
 }

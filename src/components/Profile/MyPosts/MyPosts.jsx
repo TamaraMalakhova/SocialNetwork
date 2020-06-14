@@ -4,6 +4,7 @@ import Post from './Post/Post';
 import { Field, reduxForm } from 'redux-form';
 import { required, maxLengthCrator } from '../../../utils/validators/validators';
 import { Textarea } from '../../common/FormsControls/FormsControls';
+import userPhoto from '../../../assets/images/user.jpg';
 
 const maxLength10 = maxLengthCrator(10);
 
@@ -30,7 +31,8 @@ const MyPosts = React.memo((props) => {
   let newPostElement = React.createRef();
   let postsElements = posts
     .reverse()
-    .map(p => <Post message={p.message} numberOfLikes={p.numberOfLikes} />);
+    .map(p => <Post message={p.message} numberOfLikes={p.numberOfLikes}
+      photoMini={ props.profile.photos.small || userPhoto} />);
 
   let addNewPost = (values) => {
     props.addPost(values.newPostText);
