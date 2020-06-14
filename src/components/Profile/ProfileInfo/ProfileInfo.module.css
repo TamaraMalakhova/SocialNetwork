@@ -1,0 +1,24 @@
+.descriptionBlock{
+    padding: 10px;
+
+    grid-template-areas: 
+    "ava info";
+    grid-template-columns: 4fr 10fr;
+}
+
+.background img{
+    width: 100%;
+}
+
+.fullName{
+    font-weight: bold;
+    font-size: larger;
+}
+
+.profileInfo{
+    grid-area: info; 
+}
+
+.profilePhoto{
+    grid-area: ava;
+}

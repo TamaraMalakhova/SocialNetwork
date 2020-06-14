@@ -1,0 +1,16 @@
+.postsBlock{
+    padding: 10px;
+}
+
+.posts{
+    margin-top: 10px;
+}
+
+textarea{
+    width: 100%;
+    resize: none;
+}
+
+.buttonNewPost{
+   text-align: right; 
+}

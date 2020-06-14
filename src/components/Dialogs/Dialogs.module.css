@@ -1,0 +1,46 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItems{
+    padding: 10px;
+    color: white;
+}
+
+.dialogsItems .active{
+    color:gold;
+}
+
+.dialogsItems a{
+    text-decoration: none;
+}
+
+.messages{
+    padding: 10px;
+}
+
+.messages .message{
+    color: black;
+}
+
+.dialogsItems img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+.buttonNewMessage{
+    position: absolute;
+    bottom: 50px;
+    right: 100px;
+ }
+
+ .textNewMessage{
+    width: 58%;
+    position: absolute;
+    bottom: 80px;
+    right: 100px;
+ }
+
+
