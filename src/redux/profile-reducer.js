@@ -1,4 +1,5 @@
 import { userAPI, profileAPI } from "../api/api";
+import { stopSubmit } from "redux-form";
 
 const ADD_POST = 'profilePage/ADD-POST';
 const SET_USER_PROFILE = 'profilePage/SET_USER_PROFILE';
@@ -95,6 +96,25 @@ export const savePhoto = (file) => async (dispatch) => {
     let response = await profileAPI.savePhoto(file);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+}
+
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const response = await profileAPI.saveProfile(profile);
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(userId));
+    } else {
+        let message = response.data.messages[0];
+        let wrongNetwork =  message
+        .slice(
+            message.indexOf('>') + 1,
+            message.indexOf(')')
+            ) 
+        .toLocaleLowerCase();
+        /* dispatch(stopSubmit('edit-profile', { _error: message })); */
+        dispatch(stopSubmit('edit-profile', { 'contacts': {[wrongNetwork]: message} }));
+        return Promise.reject(message);
     }
 }
 

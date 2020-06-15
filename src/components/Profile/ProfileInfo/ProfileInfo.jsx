@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './ProfileInfo.module.css';
 import userPhoto from '../../../assets/images/user.jpg';
 //import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
+import ProfileDataForm from './ProfileDataForm';
 
-const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto, saveProfile }) => {
+
+  let [editMode, setEditMode] = useState(false);
 
   const onMainPhotoSelected = (e) => {
     if (e.target.files.length) {
       savePhoto(e.target.files[0]);
     }
+  }
+
+  const onSubmit = (formData) => {
+    saveProfile(formData).then(
+      () => {
+        setEditMode(false);
+      }
+    );
   }
 
   return (
@@ -24,22 +35,53 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
           <img src={profile.photos.large || userPhoto} />
           {isOwner && <input type='file' onChange={onMainPhotoSelected} />}
         </div>
+
         {/* <ProfileStatus status = {props.status} updateStatus = {props.updateStatus} /> */}
         <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
-        <div className={s.profileInfo} >
-          <div className={s.fullName} >{profile.fullName}</div>
-          <div>{profile.aboutMe}</div>
-          <div>{profile.lookingForAJob}  {profile.lookingForAJobDescription}</div>
-          <div>Contacts:</div>
-          <div>Facebook: {profile.contacts.facebook === null ? 'Not specified' : profile.contacts.facebook} </div>
-          <div>Website: {profile.contacts.website === null ? 'Not specified' : profile.contacts.website} </div>
-          <div>VK: {profile.contacts.vk === null ? 'Not specified' : profile.contacts.vk} </div>
-          <div>Twitter: {profile.contacts.twitter === null ? 'Not specified' : profile.contacts.twitter} </div>
-          <div>Instagram: {profile.contacts.instagram === null ? 'Not specified' : profile.contacts.instagram} </div>
-        </div>
+
+        {editMode
+          ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit} />
+          : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)} />}
+
       </div>
     </div>
   );
+}
+
+const ProfileData = ({ profile, isOwner, goToEditMode }) => {
+  return <div className={s.profileInfo} >
+    {isOwner && <div> <button onClick={goToEditMode}>Edit</button> </div>}
+    <div>
+      <div className={s.fullName}>
+        <b>Full name: </b>{profile.fullName}
+      </div>
+
+      <div>
+        <b>Looking for a job: </b>{profile.lookingForAJob ? 'yes' : 'no'}
+      </div>
+      {profile.lookingForAJob &&
+        <div>
+          <b>My professional skills: </b>{profile.lookingForAJobDescription}
+        </div>}
+      <div>
+        <b>About me: </b>{profile.aboutMe}
+      </div>
+
+    </div>
+    <div>
+      <b>Contacts: </b>
+      {Object.keys(profile.contacts).map(key => {
+        return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+      })}
+    </div>
+  </div>
+}
+
+
+const Contact = ({ contactTitle, contactValue }) => {
+  return <div className={s.contact}>
+    <b> {contactTitle}: </b> {contactValue === null ? 'Not specified' : contactValue}
+  </div>
 }
 
 export default ProfileInfo;
