@@ -5,8 +5,9 @@
   }
 
 .pages{
-    cursor: pointe;
+    cursor: pointer;
     margin: 10px;
+    text-align: center;
   }
 
 .pagesNumber{

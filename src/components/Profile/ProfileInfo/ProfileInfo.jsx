@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import s from './ProfileInfo.module.css';
 import userPhoto from '../../../assets/images/user.jpg';
-//import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import ProfileDataForm from './ProfileDataForm';
 
@@ -26,17 +25,16 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto, savePr
   return (
     <div >
       <div className={s.background}>
-        <img src='https://jssors8.azureedge.net/demos/image-slider/img/faded-monaco-scenery-evening-dark-picjumbo-com-image.jpg'></img>
+        <img alt='' src='https://jssors8.azureedge.net/demos/image-slider/img/faded-monaco-scenery-evening-dark-picjumbo-com-image.jpg'></img>
       </div>
 
       <div className={s.descriptionBlock}>
 
-        <div classname={s.profilePhoto}>
-          <img src={profile.photos.large || userPhoto} />
+        <div className={s.profilePhoto}>
+          <img src={profile.photos.large || userPhoto} alt ='' />
           {isOwner && <input type='file' onChange={onMainPhotoSelected} />}
         </div>
 
-        {/* <ProfileStatus status = {props.status} updateStatus = {props.updateStatus} /> */}
         <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
 
         {editMode

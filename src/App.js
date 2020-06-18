@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-//import ProfileContainer from './components/Profile/ProfileContainer';
-//import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
@@ -20,8 +18,17 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 
 class App extends React.Component {
 
+  catchAllUnhandledErrors = (reason, Promise) => {
+    //dispatch in globalError of App-reducer
+  }
+
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
   }
 
   render() {
@@ -35,6 +42,8 @@ class App extends React.Component {
         <NavbarContainer />
 
         <div className='app-wrapper-content'>
+          <Switch>
+          <Route exact path='/' render={ () => <Redirect to={'/profile'} />} />
           <Route path='/profile/:userId?' render={ withSuspense(ProfileContainer)} />
           <Route path='/dialogs' render={ withSuspense(DialogsContainer)} />
           <Route path='/news' component={News} />
@@ -42,6 +51,8 @@ class App extends React.Component {
           <Route path='/settings' component={Settings} />
           <Route path='/users' render={() => <UsersContainer />} />
           <Route path='/login' render={() => <LoginPage />} />
+          <Route path = '*' render= {()=><div>404 NOT FOUND</div>} />
+          </Switch>
         </div>
       </div>
     );

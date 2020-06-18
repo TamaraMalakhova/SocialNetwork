@@ -7,7 +7,7 @@ const Friend = (props) => {
       <nav>
           <NavLink to = {`/friend/id${props.id}`} activeClassName = {s.activeLink}>
             <div className = {s.imgFriend}>
-              <img src = {props.avatar}></img>
+              <img src = {props.avatar} alt='your friend'/>
               <div>{props.name}</div>
             </div>
             </NavLink> 

@@ -59,7 +59,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             };
 
         default:
@@ -85,7 +85,7 @@ export const requestUsers = (page, pageSize) => async (dispatch) => {
 export const toggleFollow = async (dispatch, userId, apiMethod) => {
     dispatch(toggleFollowingProgress(true, userId));
     let data = await apiMethod(userId);
-    if (data.resultCode == 0) {
+    if (data.resultCode === 0) {
         dispatch(toggleFollowAC(userId));
     }
     dispatch(toggleFollowingProgress(false, userId));

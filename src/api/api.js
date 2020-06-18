@@ -28,11 +28,6 @@ export const userAPI = {
             .then(response => {
                 return response.data;
             });
-    },
-
-    getProfile(userId) {
-        console.warn('Obsolete method. Use profileAPI method, please!');
-        return profileAPI.getProfile(userId);
     }
 }
 

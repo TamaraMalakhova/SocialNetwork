@@ -1,9 +1,6 @@
 const SEND_MESSAGE = 'dialogsPage/SEND-MESSAGE';
 
 let initialState = {
-    /*findUserById(id){
-        return this._state.users.find(user => user.id == id );
-    },*/
     dialogs: [
         { id: 1, name: 'Ivan', avatar: 'https://i.pinimg.com/originals/0c/a9/e2/0ca9e28dcb12dc698cfd2beda6d6fa64.jpg' },
         { id: 2, name: 'Dasha', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSiK3oUwxo5Ke0RFVLixzpNsD5_YsiFA4zH8qCBvTEpNlbdVjFD&usqp=CAU' },
@@ -15,7 +12,6 @@ let initialState = {
     ],
     messages: [
         { id: 1, message: "Hello!", from: "me" },
-        /*{ id: 2, message: "Hi! How are you?", from: this.findUserById(1).name},*/
         { id: 2, message: "Hi! How are you?", from: "Ivan" },
         { id: 3, message: "I'm fine, thanks.", from: "me" },
     ]

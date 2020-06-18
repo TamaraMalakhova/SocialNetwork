@@ -1,4 +1,4 @@
-import { userAPI, profileAPI } from "../api/api";
+import { profileAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
 
 const ADD_POST = 'profilePage/ADD-POST';
@@ -50,13 +50,13 @@ const profileReducer = (state = initialState, action) => {
         case DELETE_POST:
             return {
                 ...state,
-                posts: state.posts.filter(p => p.id != action.postId)
+                posts: state.posts.filter(p => p.id !== action.postId)
             };
 
         case SAVE_PHOTO_SUCCESS:
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: { ...state.profile, photos: action.photos }
             };
 
         default:
@@ -75,7 +75,7 @@ export const deletePost = (postId) => ({ type: DELETE_POST, postId });
 export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos });
 
 export const getUserProfile = (userId) => async (dispatch) => {
-    let response = await userAPI.getProfile(userId);
+    let response = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(response));
 }
 
@@ -86,9 +86,13 @@ export const getStatus = (userId) => async (dispatch) => {
 
 
 export const updateStatus = (status) => async (dispatch) => {
-    let response = await profileAPI.updateStatus(status);
-    if (response.data.resultCode === 0) {
-        dispatch(setStatus(status));
+    try {
+        let response = await profileAPI.updateStatus(status);
+        if (response.data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
+    } catch (error) {
+
     }
 }
 
@@ -106,14 +110,13 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
         dispatch(getUserProfile(userId));
     } else {
         let message = response.data.messages[0];
-        let wrongNetwork =  message
-        .slice(
-            message.indexOf('>') + 1,
-            message.indexOf(')')
-            ) 
-        .toLocaleLowerCase();
-        /* dispatch(stopSubmit('edit-profile', { _error: message })); */
-        dispatch(stopSubmit('edit-profile', { 'contacts': {[wrongNetwork]: message} }));
+        let wrongNetwork = message
+            .slice(
+                message.indexOf('>') + 1,
+                message.indexOf(')')
+            )
+            .toLocaleLowerCase();
+        dispatch(stopSubmit('edit-profile', { 'contacts': { [wrongNetwork]: message } }));
         return Promise.reject(message);
     }
 }
