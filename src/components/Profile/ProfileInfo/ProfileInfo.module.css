@@ -1,13 +1,9 @@
 .descriptionBlock{
     padding: 10px;
-
+    display: grid;
     grid-template-areas: 
     "ava info";
-    grid-template-columns: 4fr 10fr;
-}
-
-.background img{
-    width: 100%;
+    grid-template-columns: 4fr 8fr;
 }
 
 .fullName{
@@ -19,11 +15,47 @@
     grid-area: info; 
 }
 
-.profilePhoto{
+.profilePhotoBlock{
     grid-area: ava;
-    max-width: 200px;
+}
+
+.profilePhotoBlock img{
+    position: absolute;
+    max-width: 20rem;
+    border-radius: 10rem;
 }
 
 .contact{
-    padding-left: 10px;
+    padding-left: 2rem;
+}
+
+.profilePhotoButton{
+    position: absolute;  
+    text-align: center;
+    opacity: 0;
+}
+
+.profilePhotoBlock:hover .profilePhotoButton{
+    opacity: 1;
+}
+
+.btnEditProfileInfo{
+    text-align: right;
+}
+
+.contacts{
+    padding-left: 1rem;
+    border: 0.05rem solid rgb(158, 112, 26); 
+}
+
+.mainInfo{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 0.5rem solid rgb(158, 112, 26);
+}
+
+.mainInfo img{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
 }

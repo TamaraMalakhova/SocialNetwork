@@ -23,7 +23,9 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <AddMessageForm onSubmit = {addNewMessage} />
+                <div className={s.newMessage}>
+                    <AddMessageForm onSubmit={addNewMessage} />
+                </div>
             </div>
         </div>
     );

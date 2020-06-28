@@ -1,15 +1,19 @@
 .dialogs{
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-areas: 
+    "dlg msg";
+    grid-template-columns: 4fr 8fr;
 }
 
 .dialogsItems{
     padding: 10px;
     color: white;
+    grid-area: dlg; 
 }
 
 .dialogsItems .active{
     color:gold;
+    margin: 1rem;
 }
 
 .dialogsItems a{
@@ -18,29 +22,44 @@
 
 .messages{
     padding: 10px;
+    grid-area: msg; 
+    border-left: 0.05rem solid rgb(158, 112, 26) ;
 }
 
 .messages .message{
     color: black;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .dialogsItems img{
     width: 40px;
     height: 40px;
+    margin-right: 0.6rem;
     border-radius: 20px;
   }
 
-.buttonNewMessage{
-    position: absolute;
-    bottom: 50px;
-    right: 100px;
+.messages .newMessage .buttonNewMessage{
+    text-align: right;
  }
 
- .textNewMessage{
-    width: 58%;
-    position: absolute;
-    bottom: 80px;
-    right: 100px;
+ textarea{
+    width: 100%;
+    resize: none;
+}
+
+ .newMessage{
+     position: absolute;
+     bottom: 0;
+     right: 0;
+     padding: 1.9rem;
+     width: 47.1rem;
  }
 
+ .myMessage{
+     text-align: right;
+ }
 
+ .otherUserMessage{
+     text-align: left;
+ }

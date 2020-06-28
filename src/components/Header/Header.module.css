@@ -10,10 +10,16 @@
 
   .loginBlock{
     float: right;
-    color: white;
+    color: sienna;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
   }
 
   .loginBlock a{
-    color: white;
+    color: sienna;
     text-decoration: none;
+  }
+
+  .loginBlock button{
+    margin-left: 01rem;
   }

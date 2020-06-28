@@ -17,15 +17,16 @@ let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portion
 
     return <div className={s.pages}>
         {portionNumber > 1 && 
-        <button onClick = {() => {setPortionNumber(portionNumber -1)}}>PREV</button>}
+        <button className="btn btn-outline-secondary" onClick = {() => {setPortionNumber(portionNumber -1)}}>&laquo;</button>}
             {pages
             .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber )
             .map(p => {
                 return <span key = {p} className={currentPage === p ? s.selectedPage : s.pagesNumber}
                     onClick={(e) => { onPageChanged(p); }}> {p} </span>
             })}
-            {portionCount > portionNumber && <button onClick = {() => {setPortionNumber(portionNumber + 1)}} >
-                NEXT</button>}
+            {portionCount > portionNumber && <button className="btn btn-outline-secondary" 
+            onClick = {() => {setPortionNumber(portionNumber + 1)}} >
+            &raquo;</button>}
     </div>
 }
 

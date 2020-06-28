@@ -31,7 +31,7 @@ const MyPosts = React.memo((props) => {
   let postsElements = posts
     .reverse()
     .map(p => <Post key={p.id} message={p.message} numberOfLikes={p.numberOfLikes}
-      photoMini={ props.profile.photos.small || userPhoto} />);
+      photoMini={ props.profile.photos.small || userPhoto} userName={props.profile.fullName} />);
 
   let addNewPost = (values) => {
     props.addPost(values.newPostText);

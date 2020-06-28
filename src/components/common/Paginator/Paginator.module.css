@@ -1,16 +1,22 @@
 .selectedPage{
     font-weight: bold;
     padding: 2px;
-    border: 1px solid black;
   }
 
 .pages{
     cursor: pointer;
     margin: 10px;
-    text-align: center;
-  }
+    text-align: center;    
+}
+
+.pages img{
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  fill: rgb(255, 244, 233);
+  border: none;
+}
 
 .pagesNumber{
     padding: 2px;
-    border: 1px solid grey;
 }

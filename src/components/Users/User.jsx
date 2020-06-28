@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 let User = ({ user, followingInProgress, unfollow, follow }) => {
 
-    return <div key = {user.id}>
+    return <div key = {user.id} className={s.userCard}>
         <span>
             <NavLink to={'/profile/' + user.id} >
                 <div className={s.userPhoto}>
@@ -13,8 +13,8 @@ let User = ({ user, followingInProgress, unfollow, follow }) => {
                     alt='user'/>
                 </div>
             </NavLink>
-            <div>
-                <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+            <div className={s.buttonFollow}>
+                <button type="button" className="btn btn-outline-secondary" disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
                     user.followed ? unfollow(user.id) : follow(user.id);
                 }}>
                     {user.followed ? 'Unfollow' : 'Follow'}</button>
@@ -22,13 +22,9 @@ let User = ({ user, followingInProgress, unfollow, follow }) => {
         </span>
 
         <span>
-            <span>
-                <div>{user.name}</div>
+            <span className={s.userInfo}>
+                <div><b>{user.name}</b></div>
                 <div> {user.status} </div>
-            </span>
-            <span>
-                <div> {'user.location.country'} </div>
-                <div> {'user.location.city'} </div>
             </span>
         </span>
 
