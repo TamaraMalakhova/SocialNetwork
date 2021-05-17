@@ -109,7 +109,7 @@ export const authAPI = {
     },
 
     logout() {
-        return instance.delete(`auth/login`)
+        return instance.delete<LoginResponseType>(`auth/login`)
             .then(response => {
                 return response.data;
             });
