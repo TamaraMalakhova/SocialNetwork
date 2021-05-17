@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, unfollow, setCurrentPage, requestUsers } from '../../redux/users-reducer';
+import { follow, unfollow, actions, requestUsers } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { compose } from 'redux';
@@ -70,7 +70,9 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state)
     };
-}
+} 
+
+const setCurrentPage = actions.setCurrentPage;
 
 export default compose(
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
