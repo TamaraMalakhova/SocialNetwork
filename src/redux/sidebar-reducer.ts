@@ -14,12 +14,12 @@ let initialState = {
         { id: 6, name: 'Mikhail', avatar: 'https://trikky.ru/wp-content/blogs.dir/1/files/2019/07/17/images-1.jpg' },
         { id: 7, name: 'Ksenia', avatar: 'https://i.pinimg.com/236x/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg' },
     ] as Array<FriendType>
-};
-
-export type InitialStateType = typeof initialState
+}
 
 const sidebarReducer = (state = initialState, action: any): InitialStateType => {
     return state;
 }
 
-export default sidebarReducer;
+export default sidebarReducer
+
+export type InitialStateType = typeof initialState
