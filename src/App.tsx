@@ -13,12 +13,21 @@ import { initializeApp } from './redux/app-reducer';
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
 import { withSuspense } from './hoc/withSuspense';
+import { AppStateType } from './redux/redux-store';
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
-class App extends React.Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+  initializeApp: () => void
+}
 
-  catchAllUnhandledErrors = (reason, Promise) => {
+const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedProfile = withSuspense(ProfileContainer)
+
+class App extends React.Component<MapPropsType & DispatchPropsType> {
+
+  catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
     //dispatch in globalError of App-reducer
   }
 
@@ -44,8 +53,8 @@ class App extends React.Component {
         <div className='app-wrapper-content'>
           <Switch>
           <Route exact path='/' render={ () => <Redirect to={'/profile'} />} />
-          <Route path='/profile/:userId?' render={ withSuspense(ProfileContainer)} />
-          <Route path='/dialogs' render={ withSuspense(DialogsContainer)} />
+          <Route path='/profile/:userId?' render={() => <SuspendedProfile/>} />
+          <Route path='/dialogs' render={() => <SuspendedDialogs/>} />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />
@@ -59,11 +68,11 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized
 })
 
-export default compose(
+export default compose<React.ComponentType>(
   withRouter,
   connect(mapStateToProps, { initializeApp })
 )(App);

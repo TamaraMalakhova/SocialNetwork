@@ -1,8 +1,14 @@
 import React from 'react';
+
 import s from'./Friends.module.css';
 import Friend from './Friend/Friend';
+import { FriendType } from '../../../types/types';
 
-const Friends = (props) => {
+type PropsType = {
+  friends: Array<FriendType>
+}
+
+const Friends: React.FC<PropsType> = (props) => {
 
   let friends = props.friends;
 

@@ -1,9 +1,15 @@
-import React from 'react';
-import s from './Navbar.module.css';
-import { NavLink } from 'react-router-dom';
-import Friends from './Friends/Friends';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-const Navbar = (props) => {
+import Friends from './Friends/Friends'
+import { FriendType } from '../../types/types'
+import s from './Navbar.module.css'
+
+type PropsType = {
+  friends: Array<FriendType>
+}
+
+const Navbar: React.FC<PropsType> = (props) => {
   return (
     <nav className={s.nav}>
       <div className={s.item}>
@@ -32,7 +38,7 @@ const Navbar = (props) => {
 
       </div>
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

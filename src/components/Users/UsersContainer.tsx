@@ -72,10 +72,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 } 
 
-const setCurrentPage = actions.setCurrentPage;
-
 export default compose(
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
-        mapStateToProps, { follow, unfollow, setCurrentPage, requestUsers }
+        mapStateToProps, { follow, unfollow, setCurrentPage: actions.setCurrentPage, requestUsers }
     )
 )(UsersContainer)

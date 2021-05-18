@@ -1,5 +1,5 @@
 import React from 'react';
-import create from 'react-test-render';
+import { create } from 'react-test-renderer';
 import Paginator from './Paginator';
 
 describe('Paginator component tests', () => {

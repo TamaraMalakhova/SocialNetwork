@@ -1,13 +1,19 @@
 import React from 'react';
 import s from './Post.module.css';
 
+type PropsType = {
+  message: string 
+  numberOfLikes: number
+  //photoMini: string
+  //userName: string
+}
 
-const Post = ({ message, numberOfLikes, photoMini, userName }) => {
+const Post: React.FC<PropsType> = ({ message, numberOfLikes }) => {
   return (
     <div className={s.item}>
-      <div>
+      {/* <div>
         <img src={photoMini} alt='' /> <b>{userName}</b>
-      </div>
+      </div> */}
       <div className={s.postBody}>
         {message}
       </div>

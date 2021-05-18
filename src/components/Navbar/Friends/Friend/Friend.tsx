@@ -1,8 +1,10 @@
 import React from 'react';
-import s from'./Friend.module.css';
 import { NavLink } from 'react-router-dom';
 
-const Friend = (props) => {
+import s from'./Friend.module.css';
+import { FriendType } from '../../../../types/types';
+
+const Friend: React.FC<FriendType> = (props) => {
     return (
       <nav>
           <NavLink to = {`/friend/id${props.id}`} activeClassName = {s.activeLink}>
