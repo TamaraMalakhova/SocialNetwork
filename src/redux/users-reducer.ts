@@ -3,6 +3,7 @@ import { userAPI } from "../api/users-api";
 import { AppStateType, BaseThunkType, InferActionsTypes } from './redux-store';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+import { ResponseType } from '../api/api';
 
 const TOGGLE_FOLLOW = 'SN/USERS/TOGGLE_FOLLOW';
 const SET_USERS = 'SN/USERS/SET_USERS';
@@ -86,14 +87,15 @@ export const actions = {
 }
 
 export const requestUsers = (page: number, pageSize: number) => async (dispatch: DispatchType, getState: GetStateType) => {
-    dispatch(actions.toggleIsFetching(true));
-    let data = await userAPI.getUsers(page, pageSize);
-    dispatch(actions.toggleIsFetching(false));
-    dispatch(actions.setUsers(data.items));
-    dispatch(actions.setTotalUsersCount(data.totalCount));
+    dispatch(actions.toggleIsFetching(true))
+    dispatch(actions.setCurrentPage(page))
+    let data = await userAPI.getUsers(page, pageSize)
+    dispatch(actions.toggleIsFetching(false))
+    dispatch(actions.setUsers(data.items))
+    dispatch(actions.setTotalUsersCount(data.totalCount))
 }
 
-export const toggleFollow = async (dispatch: DispatchType, userId: number, apiMethod: any) => {
+export const toggleFollow = async (dispatch: DispatchType, userId: number, apiMethod: (userId: number) => Promise<ResponseType>) => {
     dispatch(actions.toggleFollowingProgress(true, userId));
     let data = await apiMethod(userId);
     if (data.resultCode === 0) {
@@ -103,11 +105,11 @@ export const toggleFollow = async (dispatch: DispatchType, userId: number, apiMe
 }
 
 export const follow = (userId: number): ThunkAction<Promise<void>, AppStateType, unknown, ActionsType> => async (dispatch) => {
-    toggleFollow(dispatch, userId, userAPI.follow.bind(userAPI));
+    await toggleFollow(dispatch, userId, userAPI.follow.bind(userAPI));
 }
 
 export const unfollow = (userId: number): ThunkType => async (dispatch) => {
-    toggleFollow(dispatch, userId, userAPI.unfollow.bind(userAPI));
+    await toggleFollow(dispatch, userId, userAPI.unfollow.bind(userAPI));
 }
 
 export default usersReducer;

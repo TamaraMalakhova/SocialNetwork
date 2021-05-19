@@ -18,7 +18,7 @@ it('length of posts should be incremented', () => {
     // 2. action
     let newState = profileReducer(state, action);
     // 3. expectation
-    expect(newState.posts.length).toBe(5);
+    expect(newState.posts.length).toBe(6);
 });
 
 it('message of new post should be correct', () => {
