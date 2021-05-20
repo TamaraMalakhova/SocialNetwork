@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FilterType, requestUsers, actions, follow as followAC, unfollow as unfollowAC } from '../../redux/users-reducer'
 import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getUsers, getUsersFilter } from '../../redux/users-selectors'
 
-import { UserType } from '../../types/types'
 import Paginator from '../common/Paginator/Paginator'
 import User from './User'
 import UsersSearchForm from './UsersSearchForm'
