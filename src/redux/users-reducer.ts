@@ -102,6 +102,7 @@ export const actions = {
 export const requestUsers = (page: number, pageSize: number, filter: FilterType) => async (dispatch: DispatchType, getState: GetStateType) => {
     dispatch(actions.toggleIsFetching(true))
     dispatch(actions.setCurrentPage(page))
+    dispatch(actions.setFilter(filter))
     let data = await userAPI.getUsers(page, pageSize, filter.term, filter.friend)
     dispatch(actions.toggleIsFetching(false))
     dispatch(actions.setUsers(data.items))
